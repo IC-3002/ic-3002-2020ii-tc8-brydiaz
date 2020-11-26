@@ -4,10 +4,14 @@ def contar_rutas_mas_cortas(C):
     if  C[limite][limite] == 1:
         return 0
     else:
+        if vefPosibilidad(C, limite) == -1:
+            return 0
         C[limite][limite] = 'y'
-        return verificarMatrizColumna(C, limite, 1, 0, 0) +1
-        
-
+        x = verificarMatrizColumna(C, limite, 1,0,0)+1
+        if x == 3:
+            return x+1
+        else:
+            return x
 
 
 def verificarMatrizColumna(C, limite, i, posiblesRutas, iteraciones):
@@ -54,5 +58,20 @@ def verificarMatrizColumna(C, limite, i, posiblesRutas, iteraciones):
     else:
         return posiblesRutas
 
-
-
+def vefPosibilidad(C,limite):
+    i = limite
+    x = False
+    y = False
+    while (i != -1):
+        if C[i][limite] == 1:
+            x = True
+        i -= 1
+    i = limite
+    while(i != -1):
+        if C[limite][i] == 1:
+            y = True
+        i -= 1
+    if x == True and y == True:
+        return -1
+    else:
+        return 1
